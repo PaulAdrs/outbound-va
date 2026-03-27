@@ -24,6 +24,51 @@
     --sans: 'IBM Plex Sans', sans-serif;
   }
 
+  body.light {
+    --bg: #f4f6f9;
+    --surface: #ffffff;
+    --border: #e2e8f0;
+    --border-bright: #cbd5e1;
+    --text: #0f172a;
+    --muted: #94a3b8;
+    --accent: #00b37a;
+    --accent-dim: rgba(0,179,122,0.1);
+    --accent-glow: rgba(0,179,122,0.25);
+    --warn: #d97706;
+    --error: #dc2626;
+    --success: #00b37a;
+    --pending: #2563eb;
+  }
+
+  body.light .logo-mark { background: var(--accent); }
+  body.light .logo-mark svg path { fill: #fff; }
+  body.light .btn-primary { color: #fff; }
+  body.light .drop-zone { background: #f8fafc; }
+  body.light .log-box { background: #f8fafc; }
+  body.light thead tr { background: #f8fafc; }
+  body.light .stat { background: var(--surface); }
+  body.light input[type="text"],
+  body.light input[type="password"],
+  body.light input[type="number"],
+  body.light select { background: #f8fafc; color: var(--text); }
+
+  .theme-btn {
+    background: transparent;
+    border: 1px solid var(--border-bright);
+    border-radius: 6px;
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+
+  .theme-btn:hover { border-color: var(--accent); background: var(--accent-dim); }
+
   * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
@@ -505,6 +550,7 @@
     <h1>OUTBOUND VA</h1>
     <div class="subtitle">Aircall Voice Agent / CSV → Outbound Calls</div>
   </div>
+  <button class="theme-btn" id="themeBtn" onclick="toggleTheme()" title="Toggle light/dark">🌙</button>
   <div class="env-toggle" id="envToggle" onclick="toggleEnv()">
     <div class="env-option active-staging" id="optStaging">STAGING</div>
     <div class="env-divider"></div>
@@ -667,6 +713,14 @@
   }
 
   
+  // Theme
+  let isLight = false;
+  function toggleTheme() {
+    isLight = !isLight;
+    document.body.classList.toggle('light', isLight);
+    document.getElementById('themeBtn').textContent = isLight ? '🌑' : '🌙';
+  }
+
   // Single call
   let kvCount = 0;
 
